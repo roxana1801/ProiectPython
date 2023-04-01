@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from django.views import generic
-from django.http import HttpResponse, Http404
-from django.urls import reverse_lazy
 from .models import Produse, Bakery
+from django.urls import reverse_lazy
+from django.views import generic
+from django.views.generic.edit import DeleteView
+from django.http import HttpResponse, Http404
 
 
 def index(request):
-   return HttpResponse ("Hello, world. You're at the streaming app index.")
+   return render(request, 'proiect/home.html')
 
 #def produse_list(request):
 #   try:
@@ -24,15 +25,22 @@ class Produse_list(generic.ListView):
 class ProductCreate(generic.CreateView):
     model = Produse
     template_name = "proiect/products_add.html"
-    fields = ["denumire", "descriere", "ambalaj", "pret" , "id_poza"]
+    fields = ["denumire", "descriere", "ambalaj", "id_poza"]
     context_object_name = "produse"
-    success_url = reverse_lazy('about')
+    success_url = reverse_lazy("products")
 
-def Delete(DeleteView):
+#class ProduseUpdate(generic.UpdateView):
+#    model = Produse
+#    template_name = "proiect/products_add.html"
+#    fields = ["denumire", "descriere", "ambalaj", "pret", "id_poza"]
+#    context_object_name = "produse"
+#    success_url = reverse_lazy('prezentareproduse')
+
+class produs_delete(generic.DeleteView):
     model = Produse
-    template_name = "proiect/products.html"
+    template_name = "proiect/confirm_delete.html"
     context_object_name = "produse"
-    success_url = reverse_lazy('products')
+    success_url = reverse_lazy("products")
 
 def home(request):
    #return HttpResponse ("mergeee aplicatiaaammmmmmmeeeaa")

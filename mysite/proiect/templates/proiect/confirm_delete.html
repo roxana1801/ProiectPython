@@ -16,26 +16,18 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'proiect/css/styles.css' %}" rel="stylesheet" />
     </head>
-    <body id="page-top">
+    <body>id="page-top">
+        <!-- Navigation-->
         <header>
             <h1 class="site-heading text-center text-faded d-none d-lg-block">
-                <span class="site-heading-upper text-primary mb-3">Coffee it's here!</span>
-                <span class="site-heading-lower"> 5 TO GO</span>
+                <form method="POST">
+                        {% csrf_token %}
+                        <h2 class="h6">Esti sigur ca vrei sa stergi  {{ produs.denumire }} ?</h2>
+                        <input class="btn btn-secondary btn-xl rounded-pill mt-5" type="submit" value="Da, Sterge">
+                        <a class="btn btn-secondary btn-xl rounded-pill mt-5" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                </form>
             </h1>
         </header>
-        <!-- Navigation-->
-        <section class="page-section">
-            <div class="container">
-                <h2 class="section-heading mb-0">
-                    <div class="site-heading-upper text-primary mb-0"> Adauga produsul in lista:</div>
-        <section class="page-section">
-            <div class="container">
-                <h2 class="section-heading mb-0">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <span class="site-heading-upper text-primary mb-0"> {{ form.as_p }} </span>
-                        <input class="btn btn-secondary btn-xl rounded-pill mt-5" type="submit" value="Salvare">
-                    </form>
         </section>
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; MoagaRoxanaElena 2023</p></div>
@@ -46,4 +38,3 @@
         <script src="{% static 'proiect/js/scripts.js' %}"></script>
     </body>
 </html>
-
